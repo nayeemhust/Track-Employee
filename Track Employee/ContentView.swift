@@ -1,21 +1,32 @@
 //
-//  ContentView.swift
+//  OnboardingView.swift
 //  Track Employee
-//
-//  Created by Nazmul Alam Nayeem on 2024-08-16.
-//
+//  Created by Nazmul Alam Nayeem on 2024-08-14.
 
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("hasSeenOnboarding") var hasSeenOnboarding = false
+    @AppStorage("darkModeEnabled") private var darkModeEnabled = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Group {
+            if hasSeenOnboarding {
+                TabView {
+                    EmployeeListView()
+                        .tabItem {
+                            Label("Team", systemImage: "person.3.fill")
+                        }
+                    SettingsView()
+                        .tabItem {
+                            Label("Preferences", systemImage: "gearshape")
+                        }
+                }
+            } else {
+                OnboardingView(showOnboarding: $hasSeenOnboarding)
+            }
         }
-        .padding()
+        .environment(\.colorScheme, darkModeEnabled ? .dark : .light)
     }
 }
 
