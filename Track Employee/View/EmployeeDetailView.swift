@@ -11,7 +11,6 @@ struct EmployeeDetailView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                // Employee Photo
                 AsyncImage(url: URL(string: employee.largePhoto ?? "")) { image in
                     image.resizable()
                         .scaledToFit()
@@ -24,8 +23,6 @@ struct EmployeeDetailView: View {
                         .frame(height: 200)
                 }
                 .padding(.top)
-                
-                // Employee Name and Department
                 VStack(alignment: .center, spacing: 8) {
                     Text(employee.name)
                         .font(.largeTitle)
@@ -36,8 +33,6 @@ struct EmployeeDetailView: View {
                         .font(.title3)
                         .foregroundColor(.gray)
                 }
-                
-                // Biography Section
                 if let biography = employee.bio {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Biography")
@@ -54,8 +49,6 @@ struct EmployeeDetailView: View {
                     .cornerRadius(10)
                     .padding(.top)
                 }
-                
-                // Contact Information
                 VStack(alignment: .leading, spacing: 12) {
                     if !employee.email.isEmpty {
                         HStack {
@@ -79,8 +72,6 @@ struct EmployeeDetailView: View {
                 }
                 .padding(.top)
                 .padding(.horizontal)
-                
-                // Employee Role Information
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Role")
                         .font(.title2)
